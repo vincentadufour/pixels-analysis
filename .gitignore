@@ -1,9 +1,12 @@
 # Virtual environment.
 venv/
+.venv/
 
 # Local data.
 data/
 
-# Python cache
+# Caches
 __pycache__/
 *.pyc
+.ruff_cache/
+

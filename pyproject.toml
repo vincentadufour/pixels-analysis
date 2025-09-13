@@ -1,0 +1,33 @@
+[tool.ruff]
+lint.select = ["ALL"]
+lint.ignore = [
+    "CPY001",
+    "D205",
+    "D212",
+    "T201",
+    "TD002",
+    "TD003",
+    "FIX002",
+    "D104",
+    "ERA001",
+    "D410",
+    "D411",
+    "D413",
+    "I001",
+    "RET504"
+    ]
+line-length=100
+preview = true
+
+
+
+exclude = [
+    ".git/**",
+    "data/**",
+    "__pycache__/**",
+    "venv/**",
+    ".venv/**",
+    "notebooks/**",
+    ".yaml",
+    ".gitignore"
+]
