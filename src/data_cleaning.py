@@ -80,17 +80,19 @@ def add_year_and_month_columns(data: pl.DataFrame) -> pl.DataFrame:
         data[Polars DataFrame]: Dataset with year and month columns.
     """
 
-    # Select years and months in specific and create into new Series.
-    year_series, month_series = data['date'].dt.year(), data['date'].dt.month()
-    year_series = year_series.rename('year')
-    month_series = month_series.rename('month')
-
+    # Create new columns for year and year/month.
     data = data.with_columns([
-    data['date'].dt.year().alias('year'),
-    data['date'].dt.month().alias('month'),
-    pl.col('average_score').mean().over('year').alias('yearly_mean'),
-    pl.col('average_score').mean().over(['year', 'month']).alias('monthly_mean')
-])
+        data['date'].dt.year().alias('year'),
+        data['date'].dt.month().alias('month')
+    ])
+
+    # Find mean for year & year/month.
+    data = data.with_columns([
+        pl.col('average_score').mean().over('year').alias('yearly_mean'),
+        pl.col('average_score').mean().over(['year', 'month']).alias('monthly_mean')
+    ])
+
+    print(data['month'])
 
     return data
 
@@ -133,30 +135,25 @@ def create_word_and_char_columns(data: pl.DataFrame) -> pl.DataFrame:
 
 
 def data_cleaning_pipeline(json_path: str) -> pl.DataFrame:
-
-
-def main():
     """
     Purpose:
+        Outline the data_cleaning pipeline and call methods in order.
     Inputs:
+        json_path[string]: String to JSON file. This will later be replaced by user upload.
+    Outputs:
+        data[Polars DataFrame]: Cleaned Polars DataFrame.
     """
 
-    # Load path to json file. May need to add csv's as well if user has an old backup.
-    json_path = 'data/PIXELS-BACKUP-2025-09-12T17_33_51.458262.json'
-    data = json_to_dataframe(json_path)
+    data = json_to_dataframe(json_path)         # Load path to json file.
+    data = daily_average_score(data)            # Add an average score per day.
+    data = clean_date(data)                     # Clean data column.
+    data = add_year_and_month_columns(data)     # Add year and month columns with mean scores.
+    data = create_word_and_char_columns(data)   # Fill null values in notes with None.
 
-    # Add an average score per day.
-    data = daily_average_score(data)
-
-    # Clean data and add year & month columns.
-    data = clean_date(data)
-    data = add_year_and_month_columns(data)
-
-    # Fill null values in notes with None.
-    data = create_word_and_char_columns(data)
-
-    print(data.head(-15))
+    return data
 
 
 if __name__ == "__main__":
-    main()
+    json_path = 'data/PIXELS-BACKUP-2025-09-12T17_33_51.458262.json'
+    data = data_cleaning_pipeline(json_path)
+    print(data.head(-15))
