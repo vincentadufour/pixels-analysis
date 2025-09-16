@@ -11,12 +11,11 @@ data = data_cleaning_driver(json_path)
 
 print(data.head(-15))
 
-# TODO: prettify it all
 # TODO: React? AWS? User upload? Local cached json/dataframe data?
 
 data_pd = data.to_pandas()
 plot_all_graphs(data_pd)
 
 
-search_term = "wendy"
+search_term = "froggy"
 compare_average_score_with_term(data_pd, search_term, 5)
