@@ -36,6 +36,8 @@ def heatmap_of_nulls(data: pd.DataFrame) -> NoReturn:
     plt.title("Heatmap of Missing Data")
     plt.xlabel("Columns")
     plt.ylabel("Rows")
+    
+    plt.savefig("./plots/heatmap_of_nulls.png")
     plt.show()
 
 
@@ -85,12 +87,12 @@ def interactive_rolling_statistics_plot(data: pd.DataFrame) -> NoReturn:
     fig = go.Figure()
 
     # Average score.
-    fig.add_trace(go.Scatter(x=data.index, y=data["average_score"], mode="lines", name="Score"))
+    fig.add_trace(go.Scatter(x=data["date"], y=data["average_score"], mode="lines", name="Score"))
 
     # 30-day rolling mean.
     fig.add_trace(
         go.Scatter(
-            x=data.index,
+            x=data["date"],
             y=rolling_mean,
             mode="lines",
             name="30-Day Rolling Mean",
@@ -100,7 +102,7 @@ def interactive_rolling_statistics_plot(data: pd.DataFrame) -> NoReturn:
     # 30-day rolling standard deviation.
     fig.add_trace(
         go.Scatter(
-            x=data.index,
+            x=data["date"],
             y=rolling_std,
             mode="lines",
             name="30-Day Rolling Std Dev",
@@ -189,6 +191,7 @@ def verbosity_plots(data: pd.DataFrame) -> NoReturn:
 
     # Show plot
     plt.tight_layout()
+    plt.savefig("./verbosity_plots.png")
     plt.show()
 
 
@@ -252,6 +255,7 @@ def top_common_words(data: pd.DataFrame, language: str) -> NoReturn:
         width = p.get_width()
         ax.text(width + 0.5, p.get_y() + p.get_height() / 2, f"{int(width)}", va="center")
 
+    plt.savefig("./top_common_words.png")
     plt.show()
 
 
@@ -289,6 +293,8 @@ def sentiment_vs_score(data: pd.DataFrame) -> NoReturn:
     plt.title("Sentiment vs. Score")
     plt.xlabel("Sentiment Score")
     plt.ylabel("Score")
+
+    plt.savefig("./sentiment_vs_score.png")
     plt.show()
 
 
@@ -332,6 +338,7 @@ def top_bigrams(data: pd.DataFrame, language: str) -> NoReturn:
         width = p.get_width()
         ax.text(width + 0.5, p.get_y() + p.get_height() / 2, f"{int(width)}", va="center")
 
+    plt.savefig("./plots/top_bigrams.png")
     plt.show()
 
 
@@ -343,9 +350,9 @@ def plot_all_graphs(data: pd.DataFrame) -> NoReturn:
     # heatmap_of_nulls(data)
     # interactive_line_plot(data)
     # interactive_seasonal_plot(data)
-    # interactive_rolling_statistics_plot(data)
+    interactive_rolling_statistics_plot(data)
     # box_plot(data)
     # verbosity_plots(data)
     # top_common_words(data, LANGUAGE)
     # sentiment_vs_score(data)
-    top_bigrams(data, LANGUAGE)
+    # top_bigrams(data, LANGUAGE)

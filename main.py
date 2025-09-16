@@ -17,5 +17,5 @@ data_pd = data.to_pandas()
 plot_all_graphs(data_pd)
 
 
-search_term = "froggy"
+search_term = "league"
 compare_average_score_with_term(data_pd, search_term, 5)

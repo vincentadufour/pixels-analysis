@@ -66,6 +66,7 @@ def compare_average_score_with_term(data: pd.DataFrame, term: str, print_note: s
     plt.xlabel("")
     plt.ylim(0, 5.5)
 
+    plt.savefig("./plots/analysis.png")
     plt.show()
 
     # Iterates through and prints notes including search term.
