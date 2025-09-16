@@ -36,7 +36,7 @@ def heatmap_of_nulls(data: pd.DataFrame) -> NoReturn:
     plt.title("Heatmap of Missing Data")
     plt.xlabel("Columns")
     plt.ylabel("Rows")
-    
+
     plt.savefig("./plots/heatmap_of_nulls.png")
     plt.show()
 
