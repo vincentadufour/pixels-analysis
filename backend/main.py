@@ -17,7 +17,7 @@ print(data.head(-15))
 # TODO: React? AWS? User upload? Local cached json/dataframe data?
 
 data_pd = data.to_pandas()
-plot_all_graphs(data_pd)    
+plot_all_graphs(data_pd)
 
 
 search_term = "watch"

@@ -9,6 +9,7 @@ import bcrypt
 
 auth_bp = Blueprint("auth", __name__)
 
+
 @auth_bp.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignUpForm()
@@ -25,46 +26,42 @@ def signup():
         return redirect(url_for("main.index"))
     return render_template("users_signup.html", form=form, user=current_user)
 
+
 @auth_bp.route("/sigin", methods=["GET", "POST"])
-
-
-
-
-@app.route('/users/signup', methods=['GET', 'POST'])
+@app.route("/users/signup", methods=["GET", "POST"])
 def users_signup():
     """User signup functionality."""
-
     form = SignUpForm()
     if form.validate_on_submit():
         passwd = form.passwd.data
         passwd_confirm = form.passwd_confirm.data
         if passwd == passwd_confirm:
-            hashed = bcrypt.hashpw(passwd.encode('utf-8'), bcrypt.gensalt())
+            hashed = bcrypt.hashpw(passwd.encode("utf-8"), bcrypt.gensalt())
         else:
-            return '<p>Passwords do not match!</p>'
-        
+            return "<p>Passwords do not match!</p>"
+
         new_user = User(
-            id = form.id.data,
-            email = form.email.data,
-            passwd = hashed
+            id=form.id.data,
+            email=form.email.data,
+            passwd=hashed,
         )
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('index'))
-    else:
-        return render_template('users_signup.html', title=frontend.config['USER SIGNUP'], form=form,user=current_user)
-    
+        return redirect(url_for("index"))
+    return render_template(
+        "users_signup.html", title=frontend.config["USER SIGNUP"], form=form, user=current_user
+    )
 
-@app.route('/users/signin', methods=['GET', 'POST'])
+
+@app.route("/users/signin", methods=["GET", "POST"])
 def users_signin():
     """User sign in functionality."""
-
     form = SignInForm()
     if form.validate_on_submit():
         id = form.id.data
         passwd = form.passwd.data
-        hashed_passwd = passwd.encode('utf-8')
+        hashed_passwd = passwd.encode("utf-8")
 
         user = load_user(id)
 
@@ -72,20 +69,19 @@ def users_signin():
             if bcrypt.checkpw(hashed_passwd, user.passwd):
                 login_user(user)
             else:
-                return '<p>Incorrect Password!</p>'
+                return "<p>Incorrect Password!</p>"
 
             if user.id == "admin":
-                return redirect(url_for('index_admin'))
-            else:
-                return redirect(url_for('index'))
-        else:
-            return '<p>Username not recognized!</p>'
-    else:
-        return render_template('users_signin.html', title=frontend.config['USER SIGNIN'], form=form,user=current_user)
+                return redirect(url_for("index_admin"))
+            return redirect(url_for("index"))
+        return "<p>Username not recognized!</p>"
+    return render_template(
+        "users_signin.html", title=frontend.config["USER SIGNIN"], form=form, user=current_user
+    )
 
 
-@app.route('/users/signout', methods=['GET', 'POST'])
+@app.route("/users/signout", methods=["GET", "POST"])
 def users_signout():
     """User signout functionality."""
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for("index"))

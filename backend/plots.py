@@ -81,7 +81,6 @@ def interactive_rolling_statistics_plot(data: pd.DataFrame) -> NoReturn:
     Args:
         data: Polars Dataframe with Pixels data.
     """
-
     window_size = 30
 
     rolling_mean = data["average_score"].rolling(window=window_size).mean()
