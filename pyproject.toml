@@ -14,7 +14,9 @@ lint.ignore = [
     "D411",
     "D413",
     "I001",
-    "RET504"
+    "RET504",
+    "E402",
+    "F401"
     ]
 line-length=100
 preview = true

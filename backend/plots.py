@@ -81,31 +81,34 @@ def interactive_rolling_statistics_plot(data: pd.DataFrame) -> NoReturn:
     Args:
         data: Polars Dataframe with Pixels data.
     """
-    rolling_mean = data["average_score"].rolling(window=30).mean()
-    rolling_std = data["average_score"].rolling(window=30).std()
+
+    window_size = 30
+
+    rolling_mean = data["average_score"].rolling(window=window_size).mean()
+    rolling_std = data["average_score"].rolling(window=window_size).std()
 
     fig = go.Figure()
 
     # Average score.
     fig.add_trace(go.Scatter(x=data["date"], y=data["average_score"], mode="lines", name="Score"))
 
-    # 30-day rolling mean.
+    # Rolling mean based on window size.
     fig.add_trace(
         go.Scatter(
             x=data["date"],
             y=rolling_mean,
             mode="lines",
-            name="30-Day Rolling Mean",
+            name=f"{window_size}-Day Rolling Mean",
         ),
     )
 
-    # 30-day rolling standard deviation.
+    # Rolling standard deviation based on window size.
     fig.add_trace(
         go.Scatter(
             x=data["date"],
             y=rolling_std,
             mode="lines",
-            name="30-Day Rolling Std Dev",
+            name=f"{window_size}-Day Rolling Std Dev",
         ),
     )
 
@@ -350,7 +353,7 @@ def plot_all_graphs(data: pd.DataFrame) -> NoReturn:
     # heatmap_of_nulls(data)
     # interactive_line_plot(data)
     # interactive_seasonal_plot(data)
-    interactive_rolling_statistics_plot(data)
+    # interactive_rolling_statistics_plot(data)
     # box_plot(data)
     # verbosity_plots(data)
     # top_common_words(data, LANGUAGE)

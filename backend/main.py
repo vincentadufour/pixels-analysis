@@ -1,5 +1,8 @@
 """Description: Main for pixels analysis."""
 
+import polars as pl
+import datetime as dt
+
 from src.analysis import compare_average_score_with_term
 from src.data_cleaning import data_cleaning_driver
 from src.plots import plot_all_graphs
@@ -14,8 +17,8 @@ print(data.head(-15))
 # TODO: React? AWS? User upload? Local cached json/dataframe data?
 
 data_pd = data.to_pandas()
-plot_all_graphs(data_pd)
+plot_all_graphs(data_pd)    
 
 
-search_term = "league"
+search_term = "watch"
 compare_average_score_with_term(data_pd, search_term, 5)
