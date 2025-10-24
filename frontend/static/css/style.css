@@ -2,15 +2,52 @@ body {
     background-color: #fdf6e3;
 }
 
-
-
-h1 {
-    border: 2px #eee solid;
-    color: brown;
-    text-align: center;
-    padding: 10px;
+@font-face {
+  font-family: "SN Pro";
+  src: url("../fonts/SNPro/SNPro-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
-    font-family: SN-pr;
-    src: url();
+  font-family: "SN Pro";
+  src: url("../fonts/SNPro/SNPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: bold;
+}
+@font-face {
+  font-family: "SN Pro";
+  src: url("../fonts/SNPro/SNPro-RegularItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+h1 {
+    color: #8A530A;
+    text-align: center;
+    padding: 10px;
+    font-family: 'SN Pro';
+    font-weight: bold;
+}
+
+h2 {
+    color:aquamarine;
+    text-align: center;
+    padding: 10px;
+    font-family: 'SN Pro';
+    font-weight: italic;
+}
+h3 {
+    color:black;
+    text-align: center;
+    padding: 10px;
+    font-family: 'SN Pro';
+    font-weight: normal;
+
+}
+
+
+.navbar-brand {
+    font-family: 'SN Pro';
+    font-weight: normal;
+    color: black;
 }
