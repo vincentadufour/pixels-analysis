@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- My own CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
   </head>
   <body>
     <span class="border border-dark">
-    <nav class="navbar fixed-top bg-body-tertiary">
+    <nav class="navbar fixed-top navbar-custom">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="../static/images/circle.png" width="25" height="25" class="d-inline-block align-text-top">
@@ -24,7 +24,6 @@
     </nav>
     </span>
 
-    <br>
     <div class="container">
         {% block content %} {% endblock %}
     </div>

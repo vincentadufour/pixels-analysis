@@ -1,5 +1,5 @@
 body {
-    background-color: #fdf6e3;
+  background-color: #fdf6e3;
 }
 
 @font-face {
@@ -30,19 +30,20 @@ h1 {
 }
 
 h2 {
-    color:aquamarine;
+    color:rgb(0, 0, 0);
     text-align: center;
     padding: 10px;
     font-family: 'SN Pro';
     font-weight: italic;
 }
+
 h3 {
     color:black;
     text-align: center;
     padding: 10px;
     font-family: 'SN Pro';
     font-weight: normal;
-
+    font-size:22px;
 }
 
 
@@ -50,4 +51,19 @@ h3 {
     font-family: 'SN Pro';
     font-weight: normal;
     color: black;
+}
+
+.navbar-custom {
+    background-color: #8A530A;
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+  color: rgb(255, 255, 255);
+}
+
+div.uploadButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
